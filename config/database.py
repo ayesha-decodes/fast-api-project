@@ -1,11 +1,14 @@
 from sqlmodel import SQLModel, create_engine
 from urllib.parse import quote_plus
-#Mysql connection string
-engine = create_engine(
-    "mysql+pymysql://root:" + quote_plus("1234") + "@localhost:3306/employee",
-    echo=True
+
+DATABASE_URL = (
+    "mysql+pymysql://root:"
+    + quote_plus("1234")
+    + "@localhost:3306/employee"
 )
 
-#function to create db tables from SQLModel classes
+engine = create_engine(DATABASE_URL, echo=True)
+
+
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
